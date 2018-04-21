@@ -1,7 +1,7 @@
 /*********************************************************************
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2017, PickNik Consulting
+ *  Copyright (c) 2015, University of Colorado, Boulder
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -66,9 +66,8 @@ class TFVisualTools
 public:
   /**
    * \brief Constructor
-   * \param loop_hz - how often tf is published
    */
-  explicit TFVisualTools(double loop_hz = 2);
+  TFVisualTools();
 
   /**
    * \brief Visualize transforms in Rviz, etc
@@ -78,8 +77,6 @@ public:
 
   /**
    * \brief At a certain frequency update the tf transforms that we are tracking
-   *        This is called internally by a clock, you should not need to use this
-   *        TODO: make private in next release?
    */
   void publishAllTransforms(const ros::TimerEvent& e);
 

@@ -3,8 +3,6 @@ project(rviz_visual_tools)
 
 add_definitions(-std=c++11)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 # Warnings
 add_definitions(-W -Wall -Wextra
   #-Wcast-qual
@@ -62,7 +60,6 @@ catkin_package(
     ${PROJECT_NAME}
     ${PROJECT_NAME}_gui
     ${PROJECT_NAME}_remote_control
-    ${PROJECT_NAME}_imarker_simple
   CATKIN_DEPENDS
     eigen_conversions
     geometry_msgs
@@ -72,12 +69,16 @@ catkin_package(
     tf_conversions
     trajectory_msgs
     sensor_msgs
-    roscpp
   INCLUDE_DIRS
     include
 )
 
-include_directories(SYSTEM include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS})
+include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
+
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+)
 
 ###########
 ## Build ##
@@ -86,14 +87,14 @@ include_directories(SYSTEM include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS}
 ## specify which header files need to be run through "moc",
 ## Qt's meta-object compiler.
 qt_wrap_cpp(MOC_FILES
-  src/${PROJECT_NAME}_gui.h
+  src/rviz_visual_tools_gui.h
   src/key_tool.h
 )
 
 ## specify the list of source files, including the output of
 ## the previous command which is stored in ``${MOC_FILES}``.
 set(SOURCE_FILES
-  src/${PROJECT_NAME}_gui.cpp
+  src/rviz_visual_tools_gui.cpp
   src/key_tool.cpp
 )
 
@@ -107,7 +108,7 @@ target_link_libraries(${PROJECT_NAME}_remote_control ${catkin_LIBRARIES})
 
 # Visualization Tools Library
 add_library(${PROJECT_NAME}
-  src/${PROJECT_NAME}.cpp
+  src/rviz_visual_tools.cpp
   src/tf_visual_tools.cpp
 )
 target_link_libraries(${PROJECT_NAME}
@@ -116,26 +117,10 @@ target_link_libraries(${PROJECT_NAME}
   ${Boost_LIBRARIES}
 )
 
-# Library
-add_library(${PROJECT_NAME}_imarker_simple
-  src/imarker_simple.cpp
-)
-target_link_libraries(${PROJECT_NAME}_imarker_simple
-  ${catkin_LIBRARIES}
-  ${Boost_LIBRARIES}
-  ${PROJECT_NAME}
-)
-
 # Demo executable
-add_executable(${PROJECT_NAME}_demo src/${PROJECT_NAME}_demo.cpp)
+add_executable(${PROJECT_NAME}_demo src/rviz_visual_tools_demo.cpp)
 target_link_libraries(${PROJECT_NAME}_demo
   ${catkin_LIBRARIES} ${PROJECT_NAME}
-  )
-
-# Demo executable
-add_executable(imarker_simple_demo src/imarker_simple_demo.cpp)
-target_link_libraries(imarker_simple_demo
-  ${catkin_LIBRARIES} ${PROJECT_NAME} ${PROJECT_NAME}_imarker_simple
 )
 
 ##########
@@ -166,7 +151,6 @@ install(
     ${PROJECT_NAME}
     ${PROJECT_NAME}_gui
     ${PROJECT_NAME}_remote_control
-    ${PROJECT_NAME}_imarker_simple
   LIBRARY DESTINATION
     ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
@@ -185,7 +169,7 @@ install(FILES
 )
 
 # Install executables
-install(TARGETS ${PROJECT_NAME}_demo imarker_simple_demo
+install(TARGETS ${PROJECT_NAME}_demo
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

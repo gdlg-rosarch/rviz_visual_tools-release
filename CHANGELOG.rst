@@ -2,41 +2,6 @@
 Changelog for package rviz_visual_tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.6.0 (2018-01-15)
-------------------
-* Addresses Issue #49 - Default Constructor Not Nodelet Friendly
-* Added option to pass in a node handle in the constructor that defaults to
-* Reset marker should publish initialized quaternion
-* Improve code quality - add const, static, C++11 features, clang-format
-* Create demo executable for IMarkerSimple
-* Improve memory efficiency of functions
-* Contributors: Dave Coleman, Geoffrey Chiou, Victor Lamoine
-
-3.5.1 (2017-12-25)
-------------------
-* Normalize quaternion before storage
-* Fix for ambiguous function call to publishAxis
-* Add linking to visualization tools library for imarker\_simple
-* Added arrow pub to take two points
-* Document clang-tidy
-* catkin lint
-* roslint applied
-* Clang-format again
-* Clang-tidy ALL
-* C++11 optimizations
-* Fix deprecated calls to convertFromXYZRPY
-* Add new convertPoseSafe() function
-* New convertFromXYZRPY() function to avoid deprecation warning
-* Allow to enable frame locking in the markers/markers arrays
-* Update license year
-* IMarkerSimple: set name and pose
-* New printTransformFull() function
-* Removed deprecated warning
-* New class for easily using 6dof imarkers
-* More options to tf\_visual\_tools
-* Update README.md
-* Contributors: Andy McEvoy, Dave Coleman, Fadri Furrer, Victor Lamoine
-
 3.4.1 (2017-06-20)
 ------------------
 * Add dependency on QT5 for Ubuntu Zesty/Lunar support
@@ -286,7 +251,7 @@ Changelog for package rviz_visual_tools
 * New publishMesh function
 * Added Brown, Pink, and Lime Green colors
 * Copyright year
-* Contributors: Dave Coleman, Andy McEvoy, Jorge Canardo Alastuey
+* Contributors: Dave Coleman, Andy McEvoy, Jorge Cañardo Alastuey
 
 1.5.0 (2015-01-07)
 ------------------
